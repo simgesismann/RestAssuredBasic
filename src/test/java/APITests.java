@@ -36,4 +36,42 @@ public class APITests {
                 statusCode(201).
                 body("name", equalTo("simge"));
     }
+    @Test(priority = 4)
+    public void createPet() {
+        String postData = "{\n" +
+                "  \"id\": 0,\n" +
+                "  \"category\": {\n" +
+                "    \"id\": 0,\n" +
+                "    \"name\": \"string\"\n" +
+                "  },\n" +
+                "  \"name\": \"simge\",\n" +
+                "  \"photoUrls\": [\n" +
+                "    \"string\"\n" +
+                "  ],\n" +
+                "  \"tags\": [\n" +
+                "    {\n" +
+                "      \"id\": 0,\n" +
+                "      \"name\": \"string\"\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"status\": \"available\"\n" +
+                "}";
+        given().
+                contentType(ContentType.JSON).
+                body(postData).
+                when().
+                post("https://petstore.swagger.io/v2/pet").
+                then().
+                log().all();
+    }
+    /*
+    * status query parameter == pending , get Pet data
+    * If HTTP status code == 200 then it is succesfull
+     */
+    @Test(priority = 5)
+    public void getPet(){
+        Response rsp = RestAssured.get("https://petstore.swagger.io/v2/pet/findByStatus?status=pending");
+        Assert.assertEquals(rsp.statusCode(),200);
+    }
+
 }
