@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.equalTo;
 
 public class APITests {
-    @Test(priority = 3)
+    @Test(priority = 1)
     void getStatusCode200(){
         Response rsp = RestAssured.get("https://reqres.in/api/users?page=2");
         Assert.assertEquals(rsp.statusCode(),200);
@@ -20,7 +20,7 @@ public class APITests {
                 then().
                 statusCode(200);
     }
-    @Test(priority = 1)
+    @Test(priority = 3)
     public void createUserTest() {
         String postData = "{\n" +
                 "  \"name\": \"simge\",\n" +
